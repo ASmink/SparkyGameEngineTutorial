@@ -1,21 +1,22 @@
 #pragma once
 
 #include <iostream>
+#include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
 namespace sparky{
 	namespace graphics {
 		class Window
 		{
-		// Private Variable
+			// Private Variable
 		private:
 			const char *m_Title;
 			int m_Width, m_Height;
 			GLFWwindow *m_Window;
 
 			bool m_Closed;
-		
-		// Public Methods
+
+			// Public Methods
 		public:
 			// Class Constructor
 			Window(const char *title, int width, int height);
@@ -32,7 +33,7 @@ namespace sparky{
 			inline int getWidth() const { return m_Width; };
 			inline int getHeight() const { return m_Height; };
 
-		// Private Methods
+			// Private Methods
 		private:
 			bool init();
 		};
