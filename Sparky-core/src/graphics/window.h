@@ -6,9 +6,16 @@
 
 namespace sparky{
 	namespace graphics {
+
+#define MAX_KEYS		1024
+#define MAX_BUTTONS		32
+
 		class Window
 		{
-			// Private Variable
+		// Public Variables
+		public:
+
+		// Private Variable
 		private:
 			const char *m_Title;
 			int m_Width, m_Height;
@@ -16,7 +23,11 @@ namespace sparky{
 
 			bool m_Closed;
 
-			// Public Methods
+			bool m_MouseButtons[MAX_BUTTONS];
+			bool m_Keys[MAX_KEYS];
+			double mx, my;
+
+		// Public Methods
 		public:
 			// Class Constructor
 			Window(const char *title, int width, int height);
@@ -29,13 +40,20 @@ namespace sparky{
 			void update();
 			bool closed() const;
 
+			bool isKeyPressed(unsigned int keycode) const;
+			bool isMouseButtonPressed(unsigned int button) const;
+			void getMousePosition(double& x, double& y) const;
+
 			// Getters
 			inline int getWidth() const { return m_Width; };
 			inline int getHeight() const { return m_Height; };
 
-			// Private Methods
+		// Private Methods
 		private:
 			bool init();
+			friend static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+			friend static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+			friend static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 		};
 	}
 }
